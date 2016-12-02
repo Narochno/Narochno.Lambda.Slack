@@ -15,7 +15,6 @@ namespace Visibility.Lambda.Slack
         [LambdaSerializer(typeof(JsonSerializer))]
         public async Task EcsCloudWatch(CloudWatchEvent<EcsEventDetail> input, ILambdaContext context)
         {
-
             Console.WriteLine("Function name: " + context.FunctionName);
             Console.WriteLine("RemainingTime: " + context.RemainingTime);
             await Task.Delay(TimeSpan.FromSeconds(0.42));
