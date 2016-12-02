@@ -1,0 +1,10 @@
+FROM cl0sey/dotnet-mono-docker:1.1-sdk
+
+ARG TAG=docker
+ENV TAG ${TAG}
+
+WORKDIR /app
+RUN mkdir /publish
+
+COPY . .
+RUN ./build.sh -t publish --scriptargs "--tag=${TAG}"
