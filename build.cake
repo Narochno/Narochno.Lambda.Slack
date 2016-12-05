@@ -1,3 +1,5 @@
+#addin "Cake.Compression"
+
 var target = Argument("target", "Default");
 var tag = Argument<string>("tag");
 
@@ -27,6 +29,8 @@ Task("Publish")
     };
                 
     DotNetCorePublish("src/Visibility.Lambda.Slack", settings);
+
+    Zip("./publish", "publish.zip");
 });
 
 Task("Default")

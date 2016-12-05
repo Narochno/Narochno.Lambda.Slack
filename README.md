@@ -6,16 +6,11 @@ This repo is the holding ground for a slack Lambda that currently just does a ba
 
 * [Lambda C# Progamming Model](http://docs.aws.amazon.com/lambda/latest/dg/dotnet-programming-model.html)
 * [Monitor Cluster State with Amazon ECS Event Stream](https://aws.amazon.com/blogs/compute/monitor-cluster-state-with-amazon-ecs-event-stream/)
-* I'm reusing build steps from here: [.NET Core 1.1 building with Docker and Cake](https://adamhathcock.github.io/2016/11/22/net-core-1-1-building-with-docker-and-cake.html)
 
 ## Building ##
 
-I have to use Docker to build on OS X.  There is probably something I'm missing.
-
-`./docker.sh` does the following:
-
-* Uses a build container to build for debian using Cake
-* copies the publish directory out of the container to `publish/`
+* `./build.sh -t publish --scriptargs "--tag=test"` - set the tag to whatever
+* Cake builds and does a `dotnet publish`
 * zips the `publish/` directory to a zip file ready to be uploaded
 
 ## Installing into Lambda ##
