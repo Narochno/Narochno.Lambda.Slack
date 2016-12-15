@@ -1,7 +1,6 @@
 #addin "Cake.Compression"
 
 var target = Argument("target", "Default");
-var tag = Argument<string>("tag");
 
 Task("Restore")
   .Does(() =>
@@ -24,8 +23,7 @@ Task("Publish")
     {
         Framework = "netcoreapp1.0",
         Configuration = "Release",
-        OutputDirectory = "./publish/",
-        VersionSuffix = tag
+        OutputDirectory = "./publish/"
     };
                 
     DotNetCorePublish("src/Visibility.Lambda.Slack", settings);
