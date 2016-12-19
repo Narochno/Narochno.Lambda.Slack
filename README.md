@@ -1,4 +1,4 @@
-# Visibility.Lambda.Slack #
+# Narochno.Lambda.Slack #
 
 This repo is the holding ground for a slack Lambda that currently just does a basic event parse of ECS Container events and forwards them to a slack channel.
 
@@ -16,7 +16,7 @@ This repo is the holding ground for a slack Lambda that currently just does a ba
 ## Installing into Lambda ##
 
 * The base instructions pretty much work
-* Handler name: `Visibility.Lambda.Slack::Visibility.Lambda.Slack.LambdaHandler::EcsCloudWatch`
+* Handler name: `Narochno.Lambda.Slack::Narochno.Lambda.Slack.LambdaHandler::EcsCloudWatch`
 * Use an environment variable for your slack hook url called: `slack_webhook_url`
 
 ## Fun Notes ##

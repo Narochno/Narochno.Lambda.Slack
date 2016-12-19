@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Visibility.Lambda.Slack
+namespace Narochno.Lambda.Slack
 {
     public class CloudWatchEvent<TDetail>
     {

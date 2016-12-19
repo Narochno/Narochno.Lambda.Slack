@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace Visibility.Lambda.Slack
+namespace Narochno.Lambda.Slack
 {
     public class EcsEventDetail
     {

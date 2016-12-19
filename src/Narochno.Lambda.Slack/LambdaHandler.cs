@@ -8,7 +8,7 @@ using Amazon.Lambda.SNSEvents;
 using Newtonsoft.Json;
 using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
 
-namespace Visibility.Lambda.Slack
+namespace Narochno.Lambda.Slack
 {
     public class LambdaHandler
     {
@@ -20,7 +20,7 @@ namespace Visibility.Lambda.Slack
             var webhookUri = Environment.GetEnvironmentVariable("slack_webhook_url");
 
             var json = await new StreamReader(stream).ReadToEndAsync();
-
+            
             try
             {
                 var input = JsonConvert.DeserializeObject<SNSEvent>(json);
@@ -56,7 +56,7 @@ namespace Visibility.Lambda.Slack
                             fallback = $"[{input.DetailType}] [{string.Join(",", input.Resources)}].",
                             color = "good",
                             title = input.DetailType,
-                            text = JsonConvert.SerializeObject(input.Detail),
+                            text = JsonConvert.SerializeObject(input),
                         }
                     }
                 };
@@ -73,6 +73,7 @@ namespace Visibility.Lambda.Slack
                 {
                         new
                         {
+                            fallback = "Unknown message",
                             color = "good",
                             title = "Unknown message",
                             text = json

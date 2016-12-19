@@ -26,7 +26,7 @@ Task("Publish")
         OutputDirectory = "./publish/"
     };
                 
-    DotNetCorePublish("src/Visibility.Lambda.Slack", settings);
+    DotNetCorePublish("src/Narochno.Lambda.Slack", settings);
 
     Zip("./publish", "publish.zip");
 });
