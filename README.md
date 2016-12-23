@@ -1,4 +1,4 @@
-# Narochno.Lambda.Slack #
+# Narochno.Lambda.Slack [![Build status](https://ci.appveyor.com/api/projects/status/708kyw2dx07uenlo/branch/master?svg=true)](https://ci.appveyor.com/project/Narochno/narochno-lambda-slack/branch/master)
 
 This repo is the holding ground for a slack Lambda that currently just does a basic event parse of ECS Container events and forwards them to a slack channel.
 
