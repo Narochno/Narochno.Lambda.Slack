@@ -17,10 +17,3 @@ after_build:
 
 artifacts:
 - path: src\Narochno.Lambda.Slack\bin\Release\*.nupkg
-
-deploy:  
-  - provider: Environment
-    name: nuget.org
-    on:
-      branch: master
-   
