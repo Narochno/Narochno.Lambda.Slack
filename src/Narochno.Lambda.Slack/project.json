@@ -1,27 +1,18 @@
-﻿{
+{
     "version": "1.0.4",
     "buildOptions": {
-        "debugType": "portable",
-        "emitEntryPoint": true,
-        "preserveCompilationContext": true,
         "warningsAsErrors": true
     },
 
     "dependencies": {
         "Amazon.Lambda.Serialization.Json": "1.0.1",
         "Amazon.Lambda.SNSEvents": "1.0.0",
-        "System.Net.Http": "4.1.0"
+        "Narochno.Slack": "2.1.0"
     },
 
 
     "frameworks": {
-        "netcoreapp1.0": {
-            "dependencies": {
-                "Microsoft.NETCore.App": {
-                    "type": "platform",
-                    "version": "1.0.1"
-                }
-            }
+        "netstandard1.6": {
         }
     }
 }

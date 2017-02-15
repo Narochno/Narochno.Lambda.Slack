@@ -1,86 +1,63 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using System.Net.Http;
-using System.Text;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using Amazon.Lambda.Core;
-using Amazon.Lambda.SNSEvents;
-using Newtonsoft.Json;
-using JsonSerializer = Amazon.Lambda.Serialization.Json.JsonSerializer;
+using Amazon.Lambda.Serialization.Json;
+using Narochno.Lambda.Slack.Handlers;
+using Narochno.Primitives;
+using Narochno.Slack;
+using Narochno.Slack.Entities;
 
 namespace Narochno.Lambda.Slack
 {
-    public class LambdaHandler
+    public abstract class LambdaEventHandler
     {
-        private readonly HttpClient httpClient = new HttpClient();
+        private readonly SlackClient slackClient;
+        private readonly List<ISlackMessageBuilder> builders;
+
+        protected LambdaEventHandler(IEnumerable<ISlackMessageBuilder> builders)
+        {
+            slackClient = new SlackClient(new SlackConfig()
+            {
+                WebHookUrl = Environment.GetEnvironmentVariable("slack_webhook_url")
+            });
+            this.builders = builders.ToList();
+        }
+
 
         [LambdaSerializer(typeof(JsonSerializer))]
-        public async Task EcsCloudWatch(Stream stream, ILambdaContext context)
+        public async Task Handle(Stream stream, ILambdaContext context)
         {
-            var webhookUri = Environment.GetEnvironmentVariable("slack_webhook_url");
-
             var json = await new StreamReader(stream).ReadToEndAsync();
-            
-            try
+            Optional<Message> message = null;
+            foreach (var slackMessageBuilder in builders)
             {
-                var input = JsonConvert.DeserializeObject<SNSEvent>(json);
-                var obj = new
+                message = slackMessageBuilder.Handle(json, context);
+                if (message.HasValue)
                 {
-                    attachments = new[]
+                    break;
+                }
+            }
+            if (message.HasNoValue)
+            {
+                message = new Message()
+                {
+                    Attachments = new[]
                     {
-                        new
+                        new Attachment()
                         {
-                            fallback = $"[{input.Records[0].Sns.Subject}] [{input.Records[0].Sns.TopicArn}].",
-                            color = "good",
-                            title = input.Records[0].Sns.Subject,
-                            text = JsonConvert.SerializeObject(input.Records[0].Sns.Message),
+                            Fallback ="Unknown message",
+                            Color = "good",
+                            Title =  "Unknown message",
+                            Text =  json
                         }
                     }
                 };
-                await httpClient.PostAsync(webhookUri, new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json"));
-                return;
             }
-            catch (Exception e)
-            {
-                context.Logger.Log(e.ToString());
-            }
-            try
-            {
-                var input = JsonConvert.DeserializeObject<CloudWatchEvent<EcsEventDetail>>(json);
-                var obj = new
-                {
-                    attachments = new[]
-                    {
-                        new
-                        {
-                            fallback = $"[{input.DetailType}] [{string.Join(",", input.Resources)}].",
-                            color = "good",
-                            title = input.DetailType,
-                            text = JsonConvert.SerializeObject(input),
-                        }
-                    }
-                };
-                await httpClient.PostAsync(webhookUri, new StringContent(JsonConvert.SerializeObject(obj), Encoding.UTF8, "application/json"));
-                return;
-            }
-            catch (Exception e)
-            {
-                context.Logger.Log(e.ToString());
-            }
-            var obj2 = new
-            {
-                attachments = new[]
-                {
-                        new
-                        {
-                            fallback = "Unknown message",
-                            color = "good",
-                            title = "Unknown message",
-                            text = json
-                        }
-                    }
-            };
-            await httpClient.PostAsync(webhookUri, new StringContent(JsonConvert.SerializeObject(obj2), Encoding.UTF8, "application/json"));
+            await slackClient.PostMessage(message.Value, CancellationToken.None);
         }
     }
 }

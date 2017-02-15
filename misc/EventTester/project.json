@@ -1,0 +1,26 @@
+﻿{
+    "version": "1.0.0-*",
+    "buildOptions": {
+        "emitEntryPoint": true
+    },
+
+    "dependencies": {
+        "Amazon.Lambda.Tools": "1.2.1-preview1",
+        "Narochno.Lambda.Slack": { "target": "project" }
+    },
+
+    "tools": {
+        "Amazon.Lambda.Tools": "1.2.1-preview1"
+    },
+
+    "frameworks": {
+        "netcoreapp1.0": {
+            "dependencies": {
+                "Microsoft.NETCore.App": {
+                    "type": "platform",
+                    "version": "1.0.1"
+                }
+            }
+        }
+    }
+}

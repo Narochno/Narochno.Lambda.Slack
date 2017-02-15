@@ -1,0 +1,11 @@
+{
+  "profile":"default",
+  "region" : "eu-west-1",
+  "configuration" : "Release",
+  "framework" : "netcoreapp1.0",
+  "function-runtime":"dotnetcore1.0",
+  "function-memory-size" : 256,
+  "function-timeout" : 30,
+  "function-handler" : "EventTester::EventTester.TestHandler::Handle",
+  "function-name" : "eventtester"
+}
