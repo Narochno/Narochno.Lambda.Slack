@@ -3,11 +3,11 @@ using Narochno.Lambda.Slack.Events;
 using Narochno.Slack.Entities;
 using Newtonsoft.Json;
 
-namespace Narochno.Lambda.Slack.Handlers
+namespace Narochno.Lambda.Slack.MessageBuilders
 {
-    public class EcsEventMessageBuilder : SlackMessageBuilder<CloudWatchEvent<EcsEventDetail>>
+    public class EcsEventMessageBuilder : JsonMessageBuilder<CloudWatchEvent<EcsEventDetail>>
     {
-        protected override Message Handle(CloudWatchEvent<EcsEventDetail> input, ILambdaContext context)
+        protected override Message Build(CloudWatchEvent<EcsEventDetail> input, ILambdaContext context)
         {
             return new Message()
             {
