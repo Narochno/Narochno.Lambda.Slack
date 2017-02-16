@@ -4,7 +4,7 @@ using Narochno.Lambda.Events.Types;
 using Narochno.Slack.Entities;
 using Newtonsoft.Json;
 
-namespace Narochno.Lambda.Slack.MessageBuilders
+namespace Narochno.Lambda.Slack
 {
     public class EcsEventMessageBuilder : JsonEventProcessor<CloudWatchEvent<EcsEventDetail>, Message>
     {

@@ -19,6 +19,7 @@ namespace Narochno.Lambda.Events
         {
             try
             {
+
                 return eventProcessor.TryBuild(snsEvent.Records[0].Sns.Message, context);
             }
             catch (Exception)
