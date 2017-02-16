@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Narochno.Lambda.Slack.Events
+namespace Narochno.Lambda.Events.Types
 {
     public class CodeCommitEvent
     {

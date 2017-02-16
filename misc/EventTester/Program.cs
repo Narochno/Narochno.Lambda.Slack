@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Amazon.Lambda.SNSEvents;
-using Narochno.Lambda.Slack.Events;
 using Newtonsoft.Json;
 
 namespace EventTester

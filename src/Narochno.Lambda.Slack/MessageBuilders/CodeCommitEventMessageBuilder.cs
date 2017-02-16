@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using Amazon.Lambda.Core;
-using Narochno.Lambda.Slack.Events;
+using Narochno.Lambda.Events;
+using Narochno.Lambda.Events.Types;
 using Narochno.Slack.Entities;
 using Newtonsoft.Json;
 
 namespace Narochno.Lambda.Slack.MessageBuilders
 {
-    public class CodeCommitEventMessageBuilder : JsonMessageBuilder<CodeCommitEvent>
+    public class CodeCommitEventMessageBuilder : JsonEventProcessor<CodeCommitEvent, Message>
     {
         protected override Message Build(CodeCommitEvent input, ILambdaContext context)
         {

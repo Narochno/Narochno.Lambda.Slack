@@ -7,7 +7,8 @@
     "dependencies": {
         "Amazon.Lambda.Serialization.Json": "1.0.1",
         "Amazon.Lambda.SNSEvents": "1.0.0",
-        "Narochno.Slack": "2.1.0"
+        "Narochno.Slack": "2.1.0",
+        "Narochno.Lambda.Events":  { "target": "project" }
     },
 
     "frameworks": {

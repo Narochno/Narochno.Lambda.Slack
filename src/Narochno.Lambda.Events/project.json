@@ -1,0 +1,15 @@
+﻿{
+  "version": "1.0.0-*",
+  "buildOptions": {
+    "debugType": "portable"
+  },
+  "dependencies": {
+      "Amazon.Lambda.Serialization.Json": "1.0.1",
+      "Amazon.Lambda.SNSEvents": "1.0.0",
+      "Narochno.Primitives": "2.6.0"
+  },
+  "frameworks": {
+    "netstandard1.6": {
+    }
+  }
+}

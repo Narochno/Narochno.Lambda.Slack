@@ -1,7 +1,7 @@
 ﻿using System;
 using Newtonsoft.Json;
 
-namespace Narochno.Lambda.Slack.Events
+namespace Narochno.Lambda.Events.Types
 {
     public class CloudWatchEvent<TDetail>
     {

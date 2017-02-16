@@ -1,14 +1,17 @@
-﻿using Narochno.Lambda.Slack;
+﻿using Narochno.Lambda.Events;
+using Narochno.Lambda.Slack;
 using Narochno.Lambda.Slack.MessageBuilders;
+using Narochno.Slack.Entities;
 
 namespace EventTester
 {
-    public class TestHandler : LambdaEventHandler
+    public class TestHandler : SlackLambdaEventHandler
     {
         public TestHandler() :
-            base(new HandlerBuilder()
+            base(new AmazonEventHandlerBuilder<Message>()
                 .AddMessageType<EcsEventMessageBuilder>()
-                .AddMessageTypeForSNS<CodeCommitEventMessageBuilder>())
+                .AddMessageTypeForSns<CodeCommitEventMessageBuilder>()
+                .Build())
         {
         }
     }

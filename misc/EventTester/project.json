@@ -6,7 +6,8 @@
 
     "dependencies": {
         "Amazon.Lambda.Tools": "1.2.1-preview1",
-        "Narochno.Lambda.Slack": { "target": "project" }
+        "Narochno.Lambda.Slack": { "target": "project" },
+        "Narochno.Lambda.Events": { "target": "project" }
     },
 
     "tools": {
