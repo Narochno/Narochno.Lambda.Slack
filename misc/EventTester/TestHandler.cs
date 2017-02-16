@@ -10,6 +10,7 @@ namespace EventTester
             base(new AmazonEventHandlerBuilder<Message>()
                 .AddMessageType<EcsEventMessageBuilder>()
                 .AddMessageType<CodeCommitEventMessageBuilder>()
+                .AddMessageType<SnsEventMessageBuilder>()
                 .Build())
         {
         }
